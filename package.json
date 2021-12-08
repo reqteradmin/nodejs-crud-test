@@ -1,0 +1,14 @@
+{
+  "name": "js-crud",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "node ./src/server.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "joi": "^17.5.0",
+    "mongoose": "^6.1.0"
+  }
+}
