@@ -10,6 +10,7 @@
   "dependencies": {
     "express": "^4.17.1",
     "joi": "^17.5.0",
+    "libphonenumber-js": "^1.9.44",
     "mongoose": "^6.1.0"
   },
   "devDependencies": {

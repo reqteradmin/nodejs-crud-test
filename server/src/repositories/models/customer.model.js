@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 
+//for phone number we assume all phonenumbers are from Sweden.
+//For international format is better to add a country code field 
 const CustomerSchema = mongoose.Schema({
     firstName:String,
     lastName: String,

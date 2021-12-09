@@ -7,7 +7,7 @@ const  CreateCustomerDto =  Joi.object({
     Email: Joi.string().email().required(),
     DateOfBirth: Joi.string(),
     PhoneNumber: Joi.string().min(10).required(),
-    BankAccountNumber: Joi.number().required()
+    BankAccountNumber: Joi.string().required()
  });
 
  module.exports = CreateCustomerDto;
