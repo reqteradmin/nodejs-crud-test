@@ -1,6 +1,10 @@
 const Joi = require('joi');
 const HttpException = require('../exceptions/http.exception')
 
+/*
+It takes a DTO and validate it by Joi library.
+If you want to change the validation library,you must change here and DTO objects
+*/
  function ValidationMiddleware(schema){
     return  (req, res, next) => {
     const options = {
@@ -8,6 +12,7 @@ const HttpException = require('../exceptions/http.exception')
     };
     const { error, value } = schema.validate(req.body, options);
     if (error) {
+        //return error with the base exception that we defined in ./exceptions
         next(new HttpException(error.details.map(x => x.message).join(', '),400));
     } else {
         req.body = value;

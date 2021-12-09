@@ -1,5 +1,6 @@
 const Joi = require('joi');
 
+//DTO for creating customer with pre validation
 const  CreateCustomerDto =  Joi.object({
     FirstName: Joi.string(),
     LastName: Joi.string(),

@@ -1,6 +1,7 @@
 const Joi = require('joi');
 
-const  CreateCustomerDto =  Joi.object({
+//DTO for updating a customer with pre validation
+const  UpdateCustomerDto =  Joi.object({
     FirstName: Joi.string(),
     LastName: Joi.string(),
     Email: Joi.string().email().required(),
@@ -9,4 +10,4 @@ const  CreateCustomerDto =  Joi.object({
     BankAccountNumber: Joi.number()
  });
 
- module.exports = Customer;
+ module.exports = UpdateCustomerDto;

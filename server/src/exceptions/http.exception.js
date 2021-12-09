@@ -1,4 +1,5 @@
 
+//Top level exception for application.All other exceptions must inherit from this
 class HttpException extends Error{
     message;
     statusCode;
