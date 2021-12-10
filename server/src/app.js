@@ -7,9 +7,9 @@ class App{
     constructor(){
         this.server = express();
         this.initializeMiddlewares();
-        this.initializeRouters();
         this.initializeDatabase();
         this.initializeRouters();
+        this.initializeErrorhandling();
     }
 
     //All middlwares that must be applied at first must be called here
@@ -29,12 +29,8 @@ class App{
         Prepare connection to database with initialize connection string.
         Change connection string to your connection string.
     */
-    initializeDatabase(){
-        mongoose.connect("mongodb://localhost/mongo", {
-            useCreateIndex: true,
-            useNewUrlParser: true,
-            useUnifiedTopology: true
-          });
+    async initializeDatabase(){
+        await mongoose.connect("mongodb+srv://aazimi:eL9xbEi9GZSjiN9@cluster0.ow6pi.mongodb.net/testDB?retryWrites=true&w=majority");
     }
 
     //Error handling middleware will be called here.It must called last.
