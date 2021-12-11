@@ -2,6 +2,7 @@ const express = require('express');
 const customerRouter = require('./routes/customer.route');
 const errorMiddleware = require('./middleware/error.middleware');
 const mongoose = require("mongoose");
+var cors = require('cors');
 
 class App{
     constructor(){
@@ -16,6 +17,7 @@ class App{
     initializeMiddlewares()
     {
         this.server.use(express.json());
+        this.server.use(cors());
     }
 
     //All main routes of api must be list here

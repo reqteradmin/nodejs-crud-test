@@ -13,6 +13,7 @@ If you want to change the validation library,you must change here and DTO object
     const { error, value } = schema.validate(req.body, options);
     if (error) {
         //return error with the base exception that we defined in ./exceptions
+        console.log('validation errors: ',error.details.map(x => x.message).join(', '));
         next(new HttpException(error.details.map(x => x.message).join(', '),400));
     } else {
         req.body = value;

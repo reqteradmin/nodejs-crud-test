@@ -2,10 +2,10 @@ const Joi = require('joi');
 
 //DTO for creating customer with pre validation
 const  CreateCustomerDto =  Joi.object({
-    FirstName: Joi.string(),
-    LastName: Joi.string(),
+    FirstName: Joi.string().empty(''),
+    LastName: Joi.string().empty(''),
     Email: Joi.string().email().required(),
-    DateOfBirth: Joi.string(),
+    DateOfBirth: Joi.string().empty(''),
     PhoneNumber: Joi.string().min(10).required(),
     BankAccountNumber: Joi.string().required()
  });

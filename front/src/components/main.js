@@ -2,9 +2,8 @@ import { useState } from "react";
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
 import Button from '@mui/material/Button';
+import Alert from '@mui/material/Alert';
 
 export default function Main() {
     const [firstName,setFirstName] =useState('');
@@ -15,6 +14,9 @@ export default function Main() {
     const [bankAccountNumber,setBankAccountNumber] =useState('');
     const [emailErrorText,setEmailErrorText] = useState('');
     const [bankAccountErrorText,setBankAccountErrorText] = useState('');
+    const [phoneNumberErrorText,setPhoneNumberErrorText] = useState('');
+    const [isSaving,setIsSaving] = useState(false);
+    const [savingError,setSavingError] = useState('');
 
     const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
@@ -25,6 +27,7 @@ export default function Main() {
         return true;
     }
     const handleSaveCustomer= () =>{
+        //before sending request to back-end for saving customer ,we do some validation here
         let hasError = false;
         if(!emailRegex.test(email))
         {
@@ -42,13 +45,55 @@ export default function Main() {
         }
         else
             setBankAccountErrorText('');
-
+        
+        //for phone number validation just we check length must be =10
+        if(phoneNumber.length !== 10)
+        {
+            hasError = true;
+            setPhoneNumberErrorText('Please enter a valid phone number');
+        }
+        else
+            setPhoneNumberErrorText('')
+        if(!hasError){
+            setIsSaving(true);
+            //for demo purpose url is hardcoede
+            const apiUrl = "http://localhost:4000/customer";
+            const requestOption = {
+                method:'POST',
+                headers:{'Content-Type':'application/json'},
+                body: JSON.stringify({"FirstName" : firstName , "LastName" :lastName,"Email":email,"DateOfBirth":dateOfBirth,"PhoneNumber":phoneNumber,"BankAccountNumber":bankAccountNumber})
+            };
+            (async ()=> {
+                try{
+                    const response = await fetch(apiUrl,requestOption).catch( error => {
+                        console.log(error);
+                    });
+                    if(response.ok)
+                    {
+                        setSavingError('');
+                        alert('Customer saved.');
+                    }
+                    else{
+                        const resp = await response.json();
+                        setSavingError(resp.message);
+                        alert(resp.message);
+                    }
+                }
+                catch(err){
+                    alert('There is a problem in saving customer');
+                }
+                setIsSaving(false);
+            })();
+        }
     }
 
   return (
     <>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant="h6" gutterBottom >
         Customer Information
+        {!!savingError?<Alert severity="error">{savingError}</Alert>:null}
+        
+
       </Typography>
       <Grid container spacing={3}>
         <Grid item xs={12} sm={6}>
@@ -97,6 +142,8 @@ export default function Main() {
             variant="standard"
             value={phoneNumber}
             onChange={e => setPhoneNumber(e.target.value)}
+            error= {!!phoneNumberErrorText}
+            helperText ={phoneNumberErrorText && phoneNumberErrorText}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -128,7 +175,9 @@ export default function Main() {
           />
         </Grid>
         <Grid item xs={12}>
-        <Button variant="contained" onClick={handleSaveCustomer}>Save</Button>
+        <Button variant="contained" onClick={handleSaveCustomer}
+            disabled = {isSaving}
+        >Save</Button>
         </Grid>
       </Grid>
     </>
