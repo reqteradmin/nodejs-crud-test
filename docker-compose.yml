@@ -1,0 +1,37 @@
+version: "3.5"
+services:
+  front-app:
+    build: ./front
+    image: test-crud-app   
+    stdin_open: true
+    ports: 
+      - "3000:3000"
+    networks:
+      - my-app
+  mongo:
+    image:  mongo:5.0.2
+    restart: unless-stopped 
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=123456
+    ports:
+      - "27017:27017"
+    networks:
+      - my-app
+    volumes:
+      - mongo-data:/data/db
+  server-app:
+    depends_on:
+      - mongo
+    build: ./server
+    image: server-crud-app   
+    ports: 
+      - "4000:4000"
+    networks:
+      - my-app
+networks:
+  my-app:
+    driver: bridge
+volumes:
+  mongo-data:
+    driver: local

@@ -32,7 +32,8 @@ class App{
         Change connection string to your connection string.
     */
     async initializeDatabase(){
-        await mongoose.connect("mongodb+srv://aazimi:eL9xbEi9GZSjiN9@cluster0.ow6pi.mongodb.net/testDB?retryWrites=true&w=majority");
+
+        await mongoose.connect("mongodb://root:123456@localhost:27017/crudDb?authSource=admin");
     }
 
     //Error handling middleware will be called here.It must called last.
