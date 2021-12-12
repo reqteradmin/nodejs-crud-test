@@ -1,7 +1,9 @@
 {
   "name": "js-crud",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "server.js",
+  "author": "Amin Azimi",
+  "description" : "Crud-Tes Back-End API",
   "license": "MIT",
   "scripts": {
     "dev": "node ./src/server.js",
