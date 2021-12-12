@@ -8,8 +8,19 @@ services:
       - "3000:3000"
     networks:
       - my-app
-  mongo:
-    image:  mongo:5.0.2
+  server-app:
+    depends_on:
+      - db
+    build: ./server
+    image: server-crud-app   
+    ports: 
+      - "4000:4000"
+    networks:
+      - my-app
+    stdin_open: true
+    tty: true
+  db:
+    image:  mongo:3.6.19-xenial
     restart: unless-stopped 
     environment:
       - MONGO_INITDB_ROOT_USERNAME=root
@@ -20,15 +31,7 @@ services:
       - my-app
     volumes:
       - mongo-data:/data/db
-  server-app:
-    depends_on:
-      - mongo
-    build: ./server
-    image: server-crud-app   
-    ports: 
-      - "4000:4000"
-    networks:
-      - my-app
+
 networks:
   my-app:
     driver: bridge

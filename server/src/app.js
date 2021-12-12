@@ -33,7 +33,11 @@ class App{
     */
     async initializeDatabase(){
 
-        await mongoose.connect("mongodb://root:123456@localhost:27017/crudDb?authSource=admin");
+        await mongoose.connect("mongodb://root:123456@db:27017/crudDb?authSource=admin",{
+            useNewUrlParser: true,
+            useUnifiedTopology: true
+        });
+        console.log('connection status : ',mongoose.connection.readyState);
     }
 
     //Error handling middleware will be called here.It must called last.
