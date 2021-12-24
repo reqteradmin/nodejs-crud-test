@@ -1,41 +1,33 @@
-# CRUD Code Test 
+# Sasan Abbasi Code Test
 
-Please read each note very carefully!
+Simple Create CRUD using Nodejs + Express + Mongodb + Typescript
 
-Create a simple CRUD application with Nodejs + ExpressJS + MongoDB + (ReactJS/VueJS/Html) as front that implements the below model:
+- **TDD**: Using Superagent and Mocha
+
+### Validations
+
+- Using Decorator and "class-validator" package for Handling validation
+- It use Google LibPhoneNumber for phone number validation and "International Bank Account Number" for Account Number Validation
+
+### Generic Classes
+
+- Use Generic Classes for BaseRepository and IRead, IWrite for CQRS
+- Email is unique in the database
+
+## Run:
+
+For Run the Project:
+
 ```
-Customer {
-	FirstName
-	LastName
-	DateOfBirth
-	PhoneNumber
-	Email
-	BankAccountNumber
-}
+docker-compose up
 ```
-## Must do:
 
-- **Best Practice**: Tdd.
+For Test:
 
+```
+npm test
+```
 
+### Postman Collection
 
-### Validations (Must)
-
-- During Create; validate the phone number to be a valid mobile number only.
-
-- A Valid email and a valid account number must be checked before submitting the form.
-- You can use [Google LibPhoneNumber](https://github.com/google/libphonenumber) to validate number at the backend:
-
-
-### Storage (Must)
-
-- Store the phone number in a database with minimized space storage (choose varchar, or `ulong` whichever store less space).
-- Email must be unique in the database
-
-## Nice to do:
-- CQRS is also a plus.
-- You can use React JS or Vue JS.
-- Docker-compose project that loads database service automatically which `docker-compose up`
-- Clean git commits that show the work progress.
-
-Please clone/fork this repository and share with ID: `reqteradmin` in private mode on github.com
+There is a postman collection in the root and you should import it and test the project.
