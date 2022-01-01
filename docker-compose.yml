@@ -1,0 +1,34 @@
+version: '3'
+services:
+  mongo:
+    image: mongo
+    container_name: mymongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    volumes:
+      - "/demo-vol:/data/db"
+    networks:
+      - mynet
+    ports:
+      - 27017:27017
+  mongoexpress:
+    image: mongo-express
+    container_name: mymongoexpress
+    ports:
+      - 8081:8081
+    volumes:
+      - "/demo-vol:/data/db"
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: example
+    depends_on:
+      - mongo
+    networks:
+      - mynet
+volumes:
+  demo-vol:
+    external: true
+networks:
+  mynet:
+    external: true
