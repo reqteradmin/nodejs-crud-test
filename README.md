@@ -35,7 +35,7 @@ Customer {
 ## Nice to do:
 - CQRS is also a plus.
 - You can use React JS or Vue JS.
-- Docker-compose project that loads database service automatically which `docker-compose up`
+- Docker-compose project that loads database and all backend and frontend services automatically with `docker-compose up`
 - Clean git commits that show the work progress.
 
 Please clone/fork this repository and share with ID: `reqteradmin` in private mode on github.com
