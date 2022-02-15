@@ -1,0 +1,19 @@
+{
+    "app": {
+        "port": "5000"
+    },
+    "mail": {
+        "from": "hamid.rezaeirad28@gmail.com",
+        "to": "hamid.rezaeirad@gmail.com",
+        "smtp": "smtp.mailtrap.io",
+        "port": "587",
+        "user": "497f8e75dfed46",
+        "password": "6d74b89f7cae10"
+    },
+    "oauth": {
+        "apiAccessToken": {
+            "secretKey": "dasdjlasdhasdkj",
+            "expiry": ""
+        }
+    }
+}
